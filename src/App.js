@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 
 
 function App() {
+   console.log("app.js")
   const dispatch=useDispatch();
   
   const fetchedWords= useSelector(selectWordsList)

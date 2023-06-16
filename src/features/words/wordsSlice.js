@@ -4,6 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 export const fetchWords = createAsyncThunk(
   "wordsFetch/fetchWords",
   async (params, { getState, requestId }) => {
+     console.log("fetchWords")
     const { currentRequestId, loading, amount, difficulty } = getState().game;
 
     if (loading !== "pending" || currentRequestId !== requestId.toString()) {
@@ -79,7 +80,6 @@ export const wordsSlice = createSlice({
       state.tempLetterHints = [];
       state.tempMixedLetters = [];
       state.fetchError = "";
-      state.isFetchErr = false;
 
       if (localStorage.getItem("bestScore")) {
         state.bestScore = localStorage.getItem("bestScore");
@@ -165,11 +165,13 @@ export const wordsSlice = createSlice({
       if (state.letterHintCount === state.currentWord.originalWordLength) {
         return;
       }
-      state.warning = "1 letter hint is -2 points";
-      state.score -= 2;
-      state.totalHundredScore -= 2;
+     
 
       if (state.letterHintCount < state.currentWord.originalWordLength) {
+        state.warning = "1 letter hint is -2 points";
+        state.score -= 2;
+        state.totalHundredScore -= 2;
+        
         if (state.userAnswer.length === 0) {
           let letter = state.currentWord.originalWord.charAt(0);
           let index = state.currentWord.mixedWordArray.findIndex(
@@ -219,6 +221,7 @@ export const wordsSlice = createSlice({
       }
     },
     checkForAnswer: (state, action) => {
+       console.log("answer check")
       if (state.currentWord?.originalWordLength === state.userAnswer?.length) {
         if (state.totalHundredScore === 100) {
           state.stars += 1;
@@ -246,6 +249,7 @@ export const wordsSlice = createSlice({
       }
     },
     setErr: (state, action) => {
+       console.log("seterr")
       state.isFetchErr = true;
       state.fetchStatus = "error";
       state.fetchError = action.payload.message;
@@ -273,6 +277,13 @@ export const wordsSlice = createSlice({
           state.currentRequestId = undefined;
           state.fetchStatus = "success";
           state.isFetchErr = false;
+
+
+          state.currentWord = state.entities[state.currentQuestion];
+          state.hintList = state.currentWord?.hintList;
+          state.hintLeft = true;
+          state.showHint = false;
+          state.tempMixedLetters = state.currentWord?.mixedWordArray;
         }
       })
       .addCase(fetchWords.rejected, (state, action) => {
@@ -291,6 +302,7 @@ export const wordsSlice = createSlice({
       });
   },
 });
+
 
 export const {
   nextQuestion,

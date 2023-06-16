@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 let hintArr=[];
 
 const Hint = () => {
+   console.log("hint")
   const {hintLeft, displayHintList}=useSelector((store)=>store.game)
 
   return (

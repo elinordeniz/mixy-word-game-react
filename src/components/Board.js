@@ -7,13 +7,14 @@ import {
 } from "../theme/styledComponents";
 import {  setUserAnswer,removeUserAnswer, checkForAnswer, nextQuestion, whenTimeIsOut, getCurrentWord } from "../features/words/wordsSlice";
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Board = () => {
   const dispatch= useDispatch();
   const navigate= useNavigate();
   const {currentWord, userAnswer, setTimeOut,isCorrect, whenTimeOut, currentQuestion,gameEnd, score}=useSelector((state)=>state.game);
+   console.log("board")
   useEffect(()=>{
     dispatch(whenTimeIsOut())
   },[setTimeOut])
@@ -89,4 +90,4 @@ const Board = () => {
   );
 };
 
-export default Board;
+export default memo(Board);

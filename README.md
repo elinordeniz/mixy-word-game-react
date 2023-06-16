@@ -12,7 +12,7 @@ I coded this project with React.js framework from stratch with Redux Toolkit.
 
 - Save and update the best score to Local Storage.
 - Hints as answer letter and close meaning
-- Memoized Timer
+- Timer
 - Material UI for the components style
 
 ## API for the words

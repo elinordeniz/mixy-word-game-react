@@ -2,9 +2,10 @@ import { Alert } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import { showNotification } from "../features/mui/notifySlice";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 
 function Notification() {
+   console.log("notification")
   const dispatch = useDispatch();
   const { warning, gameEnd,currentQuestion, isFetchErr } = useSelector((store) => store.game);
   const { notification } = useSelector((store) => store.alert);
@@ -56,4 +57,4 @@ function Notification() {
   );
 }
 
-export default Notification;
+export default memo(Notification);

@@ -6,9 +6,10 @@ import {
   getInterval,
 } from "../features/words/wordsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 
 const Timer = () => {
+   console.log("timer")
   const dispatch = useDispatch();
   const { timer, setTimeOut, currentQuestion } = useSelector(
     (state) => state.game
@@ -35,4 +36,4 @@ const Timer = () => {
   return <TimerBox>{timer}</TimerBox>;
 };
 
-export default Timer;
+export default memo(Timer);

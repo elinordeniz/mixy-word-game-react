@@ -24,9 +24,9 @@ const Game = () => {
   } = useSelector((store) => store.game);
   console.log("game");
 
-  useEffect(() => {
-    entities.length !== 0 && dispatch(getCurrentWord());
-  }, [entities, currentQuestion]);
+  // useEffect(() => {
+  //   entities.length !== 0 && dispatch(getCurrentWord());
+  // }, [entities, currentQuestion]);
 
   useEffect(() => {
     if ((gameEnd && !currentWord?.id) || isFetchErr) {
@@ -44,7 +44,7 @@ const Game = () => {
             <Header />
             <Timer />
             <HintBox>{showHint && <Hint />}</HintBox>
-            {currentWord ? <Board /> : <CircularProgress />}
+             <Board />
             <BottomNav />
           </>
         )

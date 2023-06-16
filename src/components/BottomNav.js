@@ -4,8 +4,10 @@ import { FooterNav, IconItem } from "../theme/styledComponents";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchWords, startGame, setErr } from "../features/words/wordsSlice";
+import {memo} from 'react';
 
 function BottomNav() {
+   console.log("bottom nav")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleExit = () => {
@@ -42,4 +44,4 @@ function BottomNav() {
   );
 }
 
-export default BottomNav;
+export default memo(BottomNav);

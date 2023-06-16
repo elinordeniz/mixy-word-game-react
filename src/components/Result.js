@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 function Result() {
+   console.log("result")
   const { score, stars, bestScore } = useSelector((store) => store.game);
   const navigate = useNavigate();
   return (

@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+   console.log("form")
   const navigate = useNavigate();
   const [amount, setAmount] = useState("10");
   const [difficulty, setDifficulty] = useState("easy");
