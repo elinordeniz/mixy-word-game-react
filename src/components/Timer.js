@@ -1,19 +1,21 @@
 import { TimerBox } from "../theme/styledComponents";
 import {
+  selectTimer,
+  selectSetTimeOut,
   setTimeInterval,
   setTimer,
   setTime,
   getInterval,
-} from "../features/words/wordsSlice";
+} from "../features/timer/timerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, memo } from "react";
 
 const Timer = () => {
-   console.log("timer")
   const dispatch = useDispatch();
-  const { timer, setTimeOut, currentQuestion } = useSelector(
-    (state) => state.game
-  );
+  const timer = useSelector(selectTimer);
+
+  const setTimeOut = useSelector(selectSetTimeOut);
+  const { currentQuestion, userTime } = useSelector((state) => state.game);
 
   useEffect(() => {
     if (timer === 0) {
@@ -30,7 +32,7 @@ const Timer = () => {
   }, [timer, setTimeOut]);
 
   useEffect(() => {
-    dispatch(setTimer());
+    dispatch(setTimer(userTime));
   }, [currentQuestion]);
 
   return <TimerBox>{timer}</TimerBox>;

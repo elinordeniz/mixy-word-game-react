@@ -14,6 +14,7 @@ import {entity, loading as load, isFetchErr as err} from '../features/fetch/fetc
 const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const dataList=useSelector(entity)
   const loading=useSelector(load);
   const isFetchErr=useSelector(err)
@@ -23,7 +24,6 @@ const Game = () => {
     gameEnd,
     currentQuestion,
     currentWord,
-    entities
   } = useSelector((store) => store.game);
   console.log("game");
 

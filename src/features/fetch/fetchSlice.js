@@ -8,7 +8,6 @@ import axiosInstance from "../api/axiosInstance";
 export const fetchWord = createAsyncThunk(
   "fetch/fetchWords",
   async (params, { getState, requestId }) => {
-    console.log("fetchWords");
     const { amount, difficulty } = getState().game;
     const { currentRequestId, loading } = getState().fetch;
 
@@ -22,7 +21,6 @@ export const fetchWord = createAsyncThunk(
         amount: amount,
       },
     });
-    console.log("fetch slice", response.data.wordList);
     return response.data.wordList;
   }
 );

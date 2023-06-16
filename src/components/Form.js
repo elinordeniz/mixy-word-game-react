@@ -4,18 +4,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  startGame,
-  setGame,
-  getEntities
-} from "../features/words/wordsSlice";
-import {fetchWord, setFetchErr} from '../features/fetch/fetchSlice';
+import { useDispatch } from "react-redux";
+import { startGame, setGame, getEntities } from "../features/words/wordsSlice";
+import { fetchWord, setFetchErr } from "../features/fetch/fetchSlice";
+import { resetTime } from "../features/timer/timerSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Form = () => {
-   console.log("form")
   const navigate = useNavigate();
   const [amount, setAmount] = useState("10");
   const [difficulty, setDifficulty] = useState("easy");
@@ -28,7 +24,11 @@ const Form = () => {
 
     dispatch(startGame());
     dispatch(setGame({ amount, difficulty, userTime }));
-    dispatch(fetchWord()).unwrap().then((response)=>dispatch(getEntities(response))).catch((err)=>dispatch(setFetchErr(err)))
+    dispatch(resetTime(userTime));
+    dispatch(fetchWord())
+      .unwrap()
+      .then((response) => dispatch(getEntities(response)))
+      .catch((err) => dispatch(setFetchErr(err)));
     navigate("/game");
   };
   return (

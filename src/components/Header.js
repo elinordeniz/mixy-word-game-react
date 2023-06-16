@@ -9,7 +9,6 @@ import { getHint, getLetterHint } from "../features/words/wordsSlice";
 import { memo } from "react";
 
 const Header = () => {
-  console.log("header");
   const score = useSelector((store) => store.game.score, shallowEqual);
   const stars = useSelector((store) => store.game.stars, shallowEqual);
 

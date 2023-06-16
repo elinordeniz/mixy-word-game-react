@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../features/mui/notifySlice";
 
 const Home = () => {
-   console.log("home")
   const dispatch = useDispatch();
   const { fetchError, isFetchErr } = useSelector((store) => store.game);
 

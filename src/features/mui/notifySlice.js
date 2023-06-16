@@ -10,8 +10,6 @@ export const notifySlice = createSlice({
         type: action.payload.type,
         open: action.payload.open,
       };
-       console.log(state.notification)
-       console.log("show notificationslice")
     },
   },
 });
