@@ -6,11 +6,11 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchWords,
   startGame,
   setGame,
-  setErr,
+  getEntities
 } from "../features/words/wordsSlice";
+import {fetchWord, setFetchErr} from '../features/fetch/fetchSlice';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,9 +28,7 @@ const Form = () => {
 
     dispatch(startGame());
     dispatch(setGame({ amount, difficulty, userTime }));
-    dispatch(fetchWords())
-      .unwrap()
-      .catch((err) => dispatch(setErr(err)));
+    dispatch(fetchWord()).unwrap().then((response)=>dispatch(getEntities(response))).catch((err)=>dispatch(setFetchErr(err)))
     navigate("/game");
   };
   return (

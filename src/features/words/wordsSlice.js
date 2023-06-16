@@ -1,26 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../api/axiosInstance";
-
-export const fetchWords = createAsyncThunk(
-  "wordsFetch/fetchWords",
-  async (params, { getState, requestId }) => {
-     console.log("fetchWords")
-    const { currentRequestId, loading, amount, difficulty } = getState().game;
-
-    if (loading !== "pending" || currentRequestId !== requestId.toString()) {
-      return;
-    }
-
-    const response = await axiosInstance["get"]("/api/v1/word", {
-      params: {
-        difficulty: difficulty,
-        amount: amount,
-      },
-    });
-    console.log(response.data.wordList);
-    return response.data.wordList;
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 export const wordsSlice = createSlice({
   name: "game",
@@ -39,9 +17,6 @@ export const wordsSlice = createSlice({
     warning: "",
     error: false,
     entities: [],
-    fetchError: "",
-    isFetchErr: false,
-    loading: "idle",
     currentRequestId: undefined,
     fetchStatus: null,
     currentQuestion: 0,
@@ -79,7 +54,7 @@ export const wordsSlice = createSlice({
       state.letterHintCount = 0;
       state.tempLetterHints = [];
       state.tempMixedLetters = [];
-      state.fetchError = "";
+      //state.fetchError = "";
 
       if (localStorage.getItem("bestScore")) {
         state.bestScore = localStorage.getItem("bestScore");
@@ -126,8 +101,11 @@ export const wordsSlice = createSlice({
         state.tempMixedLetters = [];
       }
     },
+    getEntities: (state, action)=>{
+      state.entities=action.payload;
+    },
     getCurrentWord: (state, action) => {
-      state.currentWord = state.entities[state.currentQuestion];
+      state.currentWord = action.payload[state.currentQuestion];
       state.hintList = state.currentWord?.hintList;
       state.hintLeft = true;
       state.showHint = false;
@@ -171,7 +149,7 @@ export const wordsSlice = createSlice({
         state.warning = "1 letter hint is -2 points";
         state.score -= 2;
         state.totalHundredScore -= 2;
-        
+
         if (state.userAnswer.length === 0) {
           let letter = state.currentWord.originalWord.charAt(0);
           let index = state.currentWord.mixedWordArray.findIndex(
@@ -248,59 +226,9 @@ export const wordsSlice = createSlice({
         state.whenTimeOut = true;
       }
     },
-    setErr: (state, action) => {
-       console.log("seterr")
-      state.isFetchErr = true;
-      state.fetchStatus = "error";
-      state.fetchError = action.payload.message;
-      state.gameEnd = true;
-    },
+   
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchWords.pending, (state, action) => {
-        if (state.loading === "idle") {
-          state.loading = "pending";
-          state.currentRequestId = action.meta.requestId;
-          state.fetchStatus = "loading";
-          state.isFetchErr = false;
-        }
-      })
-      .addCase(fetchWords.fulfilled, (state, action) => {
-        const { requestId } = action.meta;
-        if (
-          state.loading === "pending" &&
-          state.currentRequestId === requestId
-        ) {
-          state.entities = action.payload;
-          state.loading = "idle";
-          state.currentRequestId = undefined;
-          state.fetchStatus = "success";
-          state.isFetchErr = false;
 
-
-          state.currentWord = state.entities[state.currentQuestion];
-          state.hintList = state.currentWord?.hintList;
-          state.hintLeft = true;
-          state.showHint = false;
-          state.tempMixedLetters = state.currentWord?.mixedWordArray;
-        }
-      })
-      .addCase(fetchWords.rejected, (state, action) => {
-        const { requestId } = action.meta;
-        if (
-          state.loading === "pending" &&
-          state.currentRequestId === requestId
-        ) {
-          state.loading = "idle";
-          state.fetchError = action.error.message;
-          state.isFetchErr = true;
-          state.currentRequestId = undefined;
-          state.fetchStatus = "error";
-          state.gameEnd = true;
-        }
-      });
-  },
 });
 
 
@@ -319,7 +247,7 @@ export const {
   getLetterHint,
   startGame,
   setGame,
-  setErr,
+  getEntities
 } = wordsSlice.actions;
 
 export default wordsSlice.reducer;

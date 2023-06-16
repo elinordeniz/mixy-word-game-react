@@ -9,24 +9,27 @@ import { HintBox, GameBox } from "../theme/styledComponents";
 import { getCurrentWord } from "../features/words/wordsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {entity, loading as load, isFetchErr as err} from '../features/fetch/fetchSlice'
 
 const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dataList=useSelector(entity)
+  const loading=useSelector(load);
+  const isFetchErr=useSelector(err)
+
   const {
-    loading,
-    isFetchErr,
     showHint,
     gameEnd,
     currentQuestion,
     currentWord,
-    entities,
+    entities
   } = useSelector((store) => store.game);
   console.log("game");
 
-  // useEffect(() => {
-  //   entities.length !== 0 && dispatch(getCurrentWord());
-  // }, [entities, currentQuestion]);
+  useEffect(() => {    
+    dataList.length !== 0 && dispatch(getCurrentWord(dataList));
+  }, [dataList, currentQuestion]);
 
   useEffect(() => {
     if ((gameEnd && !currentWord?.id) || isFetchErr) {
@@ -36,10 +39,10 @@ const Game = () => {
 
   return (
     <GameBox>
-      {loading === "pending" ? (
+      {loading === "pending" || currentWord?.length===0 ? (
         <CircularProgress />
       ) : (
-        currentWord?.id && (
+        currentWord?.length!==0 && (
           <>
             <Header />
             <Timer />

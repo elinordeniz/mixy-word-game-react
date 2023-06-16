@@ -3,7 +3,9 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { FooterNav, IconItem } from "../theme/styledComponents";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchWords, startGame, setErr } from "../features/words/wordsSlice";
+import { startGame } from "../features/words/wordsSlice";
+import { fetchWord, setFetchErr } from "../features/fetch/fetchSlice";
+
 import {memo} from 'react';
 
 function BottomNav() {
@@ -16,9 +18,9 @@ function BottomNav() {
 
   const handleRestart = () => {
     dispatch(startGame());
-    dispatch(fetchWords())
+    dispatch(fetchWord())
       .unwrap()
-      .catch((err) => dispatch(setErr(err)));
+      .catch((err) => dispatch(setFetchErr(err)));
     navigate("/game");
   };
 
