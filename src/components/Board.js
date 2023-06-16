@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Board = () => {
   const dispatch= useDispatch();
   const navigate= useNavigate();
-  const {currentWord, userAnswer,timer, setTimeOut,isCorrect, whenTimeOut, currentQuestion,gameEnd}=useSelector((state)=>state.game);
+  const {currentWord, userAnswer, setTimeOut,isCorrect, whenTimeOut, currentQuestion,gameEnd, score}=useSelector((state)=>state.game);
   useEffect(()=>{
     dispatch(whenTimeIsOut())
   },[setTimeOut])
@@ -21,7 +21,6 @@ const Board = () => {
   const handleAnswer=(e,{letter, key})=>{
     e.preventDefault();
     dispatch(setUserAnswer({letter,key}))
-    console.log(userAnswer)
   }
 
   const handleRemove = (e, {letter,key})=>{
@@ -48,7 +47,6 @@ const Board = () => {
   },[isCorrect, whenTimeOut])
 
   useEffect(()=>{
-     console.log(currentWord)
     if(currentWord.length===0){
       navigate('/')
     }
@@ -59,7 +57,7 @@ const Board = () => {
   },[currentQuestion])
 
   useEffect(()=>{
-    if(gameEnd){
+    if(gameEnd && score){
       navigate('/result');
     }
   }, [gameEnd])

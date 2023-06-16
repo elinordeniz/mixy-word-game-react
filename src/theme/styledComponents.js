@@ -4,8 +4,17 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
 
+export const GameBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flex: 1,
+  flexDirection: "column",
+  justifyContent: "space-around",
+  alignItems: "center",
+  maxWidth: "md",
+  minHeight: "100%",
+  overflow: "auto",
+}));
 export const HeaderButton = styled(Paper)(({ theme }) => ({
   color: "white",
   backgroundColor: theme.palette.orange.main,
@@ -14,19 +23,26 @@ export const HeaderButton = styled(Paper)(({ theme }) => ({
   paddingRight: 9,
   borderRadius: 4,
   textAlign: "center",
-  justifyContent:'center',
-  height:'100%',
-  marginLeft:6,
-  marginRight:6
+  justifyContent: "center",
+  height: "100%",
+  marginLeft: 6,
+  marginRight: 6,
+}));
 
+export const HintBox = styled(Box)(({ theme }) => ({
+  height: "50px",
+  display: "flex",
+  justifyContent: "center",
+  alignContent: "center",
+  alignItems: "center",
+  minWidth: "100%",
 }));
 
 export const HintArea = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   padding: 12,
-  marginTop: 50,
-  marginBottom: 30,
   borderRadius: 4,
+  minHeight: "45px",
   textAlign: "center",
   display: "flex",
   flexDirection: "row",
@@ -34,6 +50,7 @@ export const HintArea = styled(Box)(({ theme }) => ({
   alignContent: "center",
   alignItems: "center",
   maxWidth: "90%",
+  overflow: "auto",
 }));
 
 export const HintCard = styled(Card)(({ theme }) => ({
@@ -44,6 +61,7 @@ export const HintCard = styled(Card)(({ theme }) => ({
   marginRight: 15,
   borderRadius: 4,
   textAlign: "center",
+  overflow: "auto",
 }));
 
 export const BoardBox = styled(Box)(({ theme }) => ({
@@ -67,8 +85,8 @@ export const AnswerBox = styled(Box)(({ theme }) => ({
   color: theme.palette.dark.main,
   fontSize: "1.9rem",
   textTransform: "uppercase",
-  fontWeight:600,
-  letterSpacing:8
+  fontWeight: 600,
+  letterSpacing: 8,
 }));
 
 export const LettersArea = styled(Stack)(({ theme }) => ({
@@ -120,9 +138,9 @@ export const TimerBox = styled(Box)(({ theme }) => ({
   width: "120px",
   height: "40px",
   opacity: 0.4,
-  display:"flex",
-  alignItems:"center",
-  justifyContent:"center"
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 export const ResultBox = styled(Box)(({ theme }) => ({
@@ -135,34 +153,30 @@ export const ResultBox = styled(Box)(({ theme }) => ({
   height: "100%",
   overflow: "auto",
   color: theme.palette.dark.main,
-  h1:{
-    fontSize:'2rem'
-  }
+  h1: {
+    fontSize: "2rem",
+  },
 }));
-
 
 export const ResultArea = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  width:"30%",
-  height:"35%",
-  minHeight:'225px',
-  minWidth:'200px',
-  padding:"10px",
-  fontSize:"1.3rem",
-  textSpacing:"1.5rem",
+  width: "30%",
+  height: "35%",
+  minHeight: "225px",
+  minWidth: "200px",
+  padding: "10px",
+  fontSize: "1.3rem",
+  textSpacing: "1.5rem",
   backgroundColor: theme.palette.orange.main,
-  fontWeight:500,
-  opacity:0.5,
+  fontWeight: 500,
+  opacity: 0.5,
   color: "white",
-  marginBottom:"10px",
-  span:{
-    fontSize:"1.7rem",
-    fontWeight:600
-
-
-  }
+  marginBottom: "10px",
+  span: {
+    fontSize: "1.7rem",
+    fontWeight: 600,
+  },
 }));
-

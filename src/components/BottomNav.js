@@ -1,25 +1,45 @@
-
-import Box from "@mui/material/Box";
-import Close from '@mui/icons-material/Close';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import {FooterNav, IconItem} from '../theme/styledComponents'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import Close from "@mui/icons-material/Close";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { FooterNav, IconItem } from "../theme/styledComponents";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchWords, startGame, setErr } from "../features/words/wordsSlice";
 
 function BottomNav() {
-    const [value, setValue]= useState();
-    const navigate=useNavigate();
-    const handleExit= ()=>{
-      navigate('/');
-    }
-  return (
-    <FooterNav >
-        <IconItem aria-label="RESTART" startIcon={<RestartAltIcon/>}> RESTART</IconItem>
-        <IconItem onClick={()=> handleExit()}  aria-label="EXIT" startIcon={<Close/>}> EXIT</IconItem>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleExit = () => {
+    navigate("/");
+  };
 
+  const handleRestart = () => {
+    dispatch(startGame());
+    dispatch(fetchWords())
+      .unwrap()
+      .catch((err) => dispatch(setErr(err)));
+    navigate("/game");
+  };
+
+  return (
+    <FooterNav>
+      <IconItem
+        onClick={() => handleRestart()}
+        aria-label="RESTART"
+        startIcon={<RestartAltIcon />}
+      >
+        {" "}
+        RESTART
+      </IconItem>
+      <IconItem
+        onClick={() => handleExit()}
+        aria-label="EXIT"
+        startIcon={<Close />}
+      >
+        {" "}
+        EXIT
+      </IconItem>
     </FooterNav>
-  )
+  );
 }
 
-export default BottomNav
+export default BottomNav;
