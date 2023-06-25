@@ -4,7 +4,7 @@ import Alert from '@mui/material/Alert';
 
 const ContainerMain = ({children}) => {
   return (
-    <Container maxWidth="md"  sx={{ backgroundColor: "primary.main", minHeight:"100vh", display:"flex", flexDirection:"column", margin:"auto", overflow:"auto"}}>
+    <Container maxWidth="md"  sx={{ backgroundColor: "primary.main", minHeight:"100vh", display:"flex", flexDirection:"column", overflow:"auto", marginRight:"auto"}}>
       <Box sx={{ backgroundColor: 'lighter.main', height:"100vh", overflow:'auto'}} >
         {/* <Alert>
           Hi

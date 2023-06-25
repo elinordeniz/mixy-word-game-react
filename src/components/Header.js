@@ -30,7 +30,7 @@ const Header = () => {
         width: "100%",
       }}
     >
-      <Box sx={{ height: "20px" }}>
+      <Box sx={{ height: "20px", marginBottom:"10px" }}>
         {notification && <Notification />}
       </Box>
       <Box
@@ -41,18 +41,14 @@ const Header = () => {
       >
         <Grid
           container
-          spacing="10"
-          justifyContent="space-between"
-          flexDirection="row"
-          margin="5"
-        >
-          <Grid display="flex" marginLeft="15px">
-            <HeaderButton onClick={() => handleHint()}>Get Hint</HeaderButton>
-            <HeaderButton onClick={() => handleLetter()}>
-              Get Letter
-            </HeaderButton>
-          </Grid>
-          <Grid display="flex" marginRight="15px">
+          spacing="5"
+          flexDirection={{xs:'column', sm:'row', md:'row'}}
+          justifyContent={{xs:'center', sm:'space-between', md:'space-between'}}
+
+          height="100%"
+          width= "100%"
+         >
+          <Grid display="flex" marginBottom={{xs:"25px", sm:0, md:0}} flexDirection="row" justifyContent="space-between" >
             <Grid item>
               <HeaderButton>Score: {score}</HeaderButton>
             </Grid>
@@ -62,6 +58,13 @@ const Header = () => {
               </HeaderButton>
             </Grid>
           </Grid>
+          <Grid display="flex" justifyContent="space-between">
+            <HeaderButton onClick={() => handleHint()}>Get Hint</HeaderButton>
+            <HeaderButton onClick={() => handleLetter()}>
+              Get Letter
+            </HeaderButton>
+          </Grid>
+          
         </Grid>
       </Box>
     </Box>

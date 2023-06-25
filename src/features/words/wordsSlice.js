@@ -188,8 +188,8 @@ export const wordsSlice = createSlice({
           if (!payload.setTimeOut) {
             clearInterval(payload.interval);
             state.isCorrect = true;
-            state.score += 55;
-            state.totalHundredScore += 55;
+            state.score += 25;
+            state.totalHundredScore += 25;
 
             if (state.totalHundredScore > 100) {
               state.stars ++;

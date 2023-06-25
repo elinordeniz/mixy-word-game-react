@@ -25,8 +25,9 @@ export const HeaderButton = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   justifyContent: "center",
   height: "100%",
-  marginLeft: 6,
+  marginLeft: 12,
   marginRight: 6,
+
 }));
 
 export const HintBox = styled(Box)(({ theme }) => ({
