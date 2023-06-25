@@ -23,4 +23,4 @@ I coded this project with React.js framework from stratch with Redux Toolkit.
 
 ## PREVIEW
 
-![](https://github.com/elinordeniz/mixy-word-game-react/blob/main/public/previewg.gif)
+<img src="https://github.com/elinordeniz/mixy-word-game-react/blob/main/public/previewg.gif" width="374" height="600"/>
