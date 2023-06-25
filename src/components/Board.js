@@ -39,7 +39,6 @@ const Board = () => {
     score,
     userTime,
   } = useSelector((state) => state.game);
-  console.log("board");
   useEffect(() => {
     dispatch(whenTimeIsOut(setTimeOut));
   }, [setTimeOut]);

@@ -199,7 +199,6 @@ export const wordsSlice = createSlice({
       }
     },
     checkForAnswer: (state, {payload}) => {
-       console.log("answer check")
       if (state.currentWord?.originalWordLength === state.userAnswer?.length) {
         if (state.totalHundredScore === 100) {
           state.stars += 1;

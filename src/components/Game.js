@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Hint from "./Hint";
 import CircularProgress from "@mui/material/CircularProgress";
-import {useEffect } from "react";
+import { useEffect } from "react";
 import Board from "./Board";
 import Timer from "./Timer";
 import BottomNav from "./BottomNav";
@@ -9,25 +9,25 @@ import { HintBox, GameBox } from "../theme/styledComponents";
 import { getCurrentWord } from "../features/words/wordsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {entity, loading as load, isFetchErr as err} from '../features/fetch/fetchSlice'
+import {
+  entity,
+  loading as load,
+  isFetchErr as err,
+} from "../features/fetch/fetchSlice";
 
 const Game = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const dataList=useSelector(entity)
-  const loading=useSelector(load);
-  const isFetchErr=useSelector(err)
+  const dataList = useSelector(entity);
+  const loading = useSelector(load);
+  const isFetchErr = useSelector(err);
 
-  const {
-    showHint,
-    gameEnd,
-    currentQuestion,
-    currentWord,
-  } = useSelector((store) => store.game);
-  console.log("game");
+  const { showHint, gameEnd, currentQuestion, currentWord } = useSelector(
+    (store) => store.game
+  );
 
-  useEffect(() => {    
+  useEffect(() => {
     dataList.length !== 0 && dispatch(getCurrentWord(dataList));
   }, [dataList, currentQuestion]);
 
@@ -39,15 +39,15 @@ const Game = () => {
 
   return (
     <GameBox>
-      {loading === "pending" || currentWord?.length===0 ? (
+      {loading === "pending" || currentWord?.length === 0 ? (
         <CircularProgress />
       ) : (
-        currentWord?.length!==0 && (
+        currentWord?.length !== 0 && (
           <>
             <Header />
             <Timer />
             <HintBox>{showHint && <Hint />}</HintBox>
-             <Board />
+            <Board />
             <BottomNav />
           </>
         )

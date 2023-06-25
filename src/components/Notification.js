@@ -5,7 +5,6 @@ import { showNotification } from "../features/mui/notifySlice";
 import { useEffect, memo } from "react";
 
 function Notification() {
-   console.log("notification")
   const dispatch = useDispatch();
   const { warning, gameEnd,currentQuestion, isFetchErr } = useSelector((store) => store.game);
   const { notification } = useSelector((store) => store.alert);
