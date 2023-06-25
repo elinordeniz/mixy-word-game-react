@@ -20,3 +20,7 @@ I coded this project with React.js framework from stratch with Redux Toolkit.
 - I have used a REST API that I created and published on RAPID API.
 - You can use free plan of this API I did from below link:
 - https://rapidapi.com/elinordeniz/api/mixy-word-guess-api
+
+## PREVIEW
+
+![](https://github.com/elinordeniz/mixy-word-game-react/blob/main/public/preview.gif)
