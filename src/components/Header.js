@@ -10,7 +10,7 @@ import { memo } from "react";
 
 const Header = () => {
   const score = useSelector((store) => store.game.score, shallowEqual);
-  const stars = useSelector((store) => store.game.stars, shallowEqual);
+  const stars = useSelector((store) => store.game.stars);
 
   const notification = useSelector(
     (store) => store.alert.notification,
@@ -31,7 +31,7 @@ const Header = () => {
       }}
     >
       <Box sx={{ height: "20px" }}>
-        {notification?.open && <Notification />}
+        {notification && <Notification />}
       </Box>
       <Box
         sx={{

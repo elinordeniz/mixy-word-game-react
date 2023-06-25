@@ -11,8 +11,7 @@ export const wordsSlice = createSlice({
     bestScore: 0,
     isCorrect: false,
     whenTimeOut: false,
-    totalHundredScore: 90,
-    //setTimeOut: false,
+    totalHundredScore: 0,
     timer: 0,
     warning: "",
     error: false,
@@ -22,7 +21,6 @@ export const wordsSlice = createSlice({
     currentQuestion: 0,
     userAnswer: [],
     currentWord: [],
-    //interval: null,
     gameEnd: true,
     hintList: [],
     showHint: false,
@@ -42,19 +40,17 @@ export const wordsSlice = createSlice({
     },
     startGame: (state, action) => {
       state.gameEnd = false;
-      //state.setTimeOut = false;
       state.whenTimeOut = false;
       state.isCorrect = false;
       state.userAnswer = [];
       state.currentQuestion = 0;
       state.score = 0;
-    //  state.timer = state.userTime;
+      state.totalHundredScore=0;
       state.displayHintList = [];
       state.warning = "";
       state.letterHintCount = 0;
       state.tempLetterHints = [];
       state.tempMixedLetters = [];
-      //state.fetchError = "";
 
       if (localStorage.getItem("bestScore")) {
         state.bestScore = localStorage.getItem("bestScore");
@@ -64,18 +60,6 @@ export const wordsSlice = createSlice({
         state.stars = localStorage.getItem("stars");
       }
     },
-    // setTimeInterval: (state) => {
-    //   state.timer -= 1;
-    // },
-    // setTimer: (state) => {
-    //   state.timer = state.userTime;
-    // },
-    // setTime: (state, action) => {
-    //   state.setTimeOut = action.payload;
-    // },
-    // getInterval: (state, action) => {
-    //   state.interval = action.payload;
-    // },
     nextQuestion: (state) => {
       if (state.entities?.length - 1 === state.currentQuestion) {
         if (state.bestScore < state.score) {
@@ -88,12 +72,10 @@ export const wordsSlice = createSlice({
         return;
       }
       if (state.entities?.length > state.currentQuestion) {
-       // state.setTimeOut = false;
         state.whenTimeOut = false;
         state.isCorrect = false;
         state.userAnswer = [];
         state.currentQuestion += 1;
-       // state.timer = state.userTime;
         state.displayHintList = [];
         state.warning = "";
         state.letterHintCount = 0;
@@ -200,18 +182,22 @@ export const wordsSlice = createSlice({
     },
     checkForAnswer: (state, {payload}) => {
       if (state.currentWord?.originalWordLength === state.userAnswer?.length) {
-        if (state.totalHundredScore === 100) {
-          state.stars += 1;
-          state.totalHundredScore = 0;
-        }
         let answerUser = state.userAnswer.join("");
         if (state.currentWord.originalWord === answerUser.toLowerCase()) {
           state.hintLeft = false;
           if (!payload.setTimeOut) {
             clearInterval(payload.interval);
             state.isCorrect = true;
-            state.score += 20;
-            state.totalHundredScore += 20;
+            state.score += 55;
+            state.totalHundredScore += 55;
+
+            if (state.totalHundredScore > 100) {
+              state.stars ++;
+              state.totalHundredScore = 0;
+      
+            }
+           
+
           }
         }
       }
@@ -233,15 +219,11 @@ export const wordsSlice = createSlice({
 
 export const {
   nextQuestion,
-  //setTimeInterval,
   getCurrentWord,
-  // setTimer,
-  // setTime,
   setUserAnswer,
   removeUserAnswer,
   checkForAnswer,
   whenTimeIsOut,
- // getInterval,
   getHint,
   getLetterHint,
   startGame,
