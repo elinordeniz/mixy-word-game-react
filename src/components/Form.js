@@ -37,10 +37,11 @@ const Form = () => {
         width: 250,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
         alignContent: "center",
         color: "dark.main",
+        marginTop:"-10%",
+        marginBottom:"0"
       }}
     >
       <h3>Mixy Mixy Word Game</h3>
