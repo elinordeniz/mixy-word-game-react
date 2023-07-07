@@ -2,6 +2,9 @@
 
 I coded this project with React.js framework from stratch with Redux Toolkit.
 
+## Play Now!
+- https://main--velvety-torrone-2d0115.netlify.app
+
 ## Featured packages
 
 - Axios
